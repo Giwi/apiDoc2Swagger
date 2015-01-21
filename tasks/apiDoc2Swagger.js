@@ -13,7 +13,7 @@ module.exports = function (grunt) {
     // Please see the Grunt documentation for more information regarding task
     // creation: http://gruntjs.com/creating-tasks
 
-    grunt.registerMultiTask('apiDoc2Swagger', 'Convert apidocjs files to Swagger', function () {
+    grunt.registerMultiTask('apidoc2swagger', 'Convert apidocjs files to Swagger', function () {
 
         function normalize(obj, key, models) {
             grunt.log.ok(key +" -> "  +grunt.util.kindOf(obj));

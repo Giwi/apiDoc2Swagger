@@ -1,11 +1,11 @@
 {
-  "name": "grunt-apiDoc2Swagger",
+  "name": "grunt-apidoc2swagger",
   "description": "Convert apidocjs files to Swagger",
   "version": "0.1.0",
   "homepage": "https://github.com/Giwi/apiDoc2Swagger",
   "author": {
-    "name": "Xavier MARIN",
-    "email": "marin.xavier@gmail.com",
+    "name": "Giwi",
+    "email": "giwi@free.fr",
     "url": "http://giwi.free.fr"
   },
   "repository": {

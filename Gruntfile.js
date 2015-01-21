@@ -29,7 +29,7 @@ module.exports = function (grunt) {
             },
 
             // Configuration to be run (and then tested).
-            apiDoc2Swagger: {
+            apidoc2swagger: {
                 testAPI : {
                     options: {
                         apiProject: 'test/api_project.json',
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 
 // Whenever the "test" task is run, first clean the "tmp" dir, then run this
 // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'apiDoc2Swagger']);
+    grunt.registerTask('test', ['clean', 'apidoc2swagger']);
 
 // By default, lint and run all tests.
     grunt.registerTask('default', ['jshint', 'test']);
