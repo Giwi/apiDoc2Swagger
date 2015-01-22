@@ -72,6 +72,12 @@ module.exports = function (grunt) {
                         destination: 'tmp/jsdoc'
                     }
                 }
+            }, changelog: {
+                options: {
+                    version: require('./package.json').version,
+                    repository : 'https://github.com/Giwi/apiDoc2Swagger/',
+                    from :'0.1.1'
+                }
             },
             bump: {
                 options: {
@@ -102,6 +108,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-swagger-js-codegen');
     grunt.loadNpmTasks('grunt-apidoc');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-conventional-changelog');
     grunt.loadNpmTasks('grunt-bump');
 // Whenever the "test" task is run, first clean the "tmp" dir, then run this
 // plugin's task(s), then test the result.

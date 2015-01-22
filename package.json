@@ -42,6 +42,7 @@
   "dependencies": {
     "grunt-apidoc": "^0.10.0",
     "grunt-bump": "0.0.16",
+    "grunt-conventional-changelog": "^1.1.0",
     "grunt-jsdoc": "^0.5.7",
     "grunt-swagger-js-codegen": "^0.2.19",
     "swagger-js-codegen": "^0.3.7"
