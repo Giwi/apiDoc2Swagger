@@ -1,7 +1,7 @@
 {
   "name": "grunt-apidoc2swagger",
   "description": "Convert apidocjs files to Swagger",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "https://github.com/Giwi/apiDoc2Swagger",
   "author": {
     "name": "Giwi",
