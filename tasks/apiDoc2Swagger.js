@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     grunt.registerMultiTask('apidoc2swagger', 'Convert apidocjs files to Swagger', function () {
 
         function normalize(obj, key, models) {
-            grunt.log.ok(key +" -> "  +grunt.util.kindOf(obj));
+            grunt.log.verbose.ok(key +" -> "  +grunt.util.kindOf(obj));
             switch(grunt.util.kindOf(obj)) {
                 case "number" :
                     return {type : "integer",format: "int64"};
@@ -26,11 +26,10 @@ module.exports = function (grunt) {
                     if(!models[key]) {
                         models[key]= {
                             id : key,
-
                             properties : {}
                         };
                         for(var k in obj) {
-                            grunt.log.warn(">>> " + key + "->" +k);
+                            grunt.log.verbose.warn(">>> " + key + "->" +k);
                             models[key].properties[k] = normalize(obj[k], k, models);
                         }
                     }
@@ -114,13 +113,10 @@ module.exports = function (grunt) {
                             myParam.paramType = "path";
                         } else {
                             myParam.paramType  ="body";
-                            // myParam.name = "body";
                         }
                         if(api.parameter.examples) {
                             api.parameter.examples.forEach(function(example) {
-                                grunt.log.warn("Looking for : " + example.title);
                                if(example.title === myParam.name) {
-                                   grunt.log.warn("Found : " + myParam.name);
                                    myParam.type = myParam.name;
                                    grunt.log.warn(myParam.type);
                                    if(!apiCollection[api.group].models[myParam.type]) {
@@ -130,7 +126,6 @@ module.exports = function (grunt) {
                                        };
                                        var content = JSON.parse(example.content);
                                        for(var k in content) {
-                                           grunt.log.warn(k);
                                            apiCollection[api.group].models[myParam.type].properties[k] = normalize(content[k], k, apiCollection[api.group].models);
                                        }
                                    }
