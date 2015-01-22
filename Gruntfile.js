@@ -74,9 +74,7 @@ module.exports = function (grunt) {
                 }
             }, changelog: {
                 options: {
-                    version: require('./package.json').version,
-                    repository : 'https://github.com/Giwi/apiDoc2Swagger/',
-                    from :'0.1.1'
+                    version: require('./package.json').version
                 }
             },
             bump: {
@@ -89,7 +87,7 @@ module.exports = function (grunt) {
                     createTag: true,
                     tagName: 'v%VERSION%',
                     tagMessage: 'Version %VERSION%',
-                    push: false,
+                    push: true,
                     pushTo: 'upstream',
                     gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
                     globalReplace: false
