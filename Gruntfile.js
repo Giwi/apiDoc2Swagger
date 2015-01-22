@@ -22,29 +22,75 @@ module.exports = function (grunt) {
                     jshintrc: '.jshintrc'
                 }
             },
+            apidoc: {
+                myapp: {
+                    src: 'test/',
+                    dest: 'tmp/apidoc'
+                }
+            },
 
             // Before generating any new files, remove any previously-created files.
             clean: {
                 tests: ['tmp']
             },
+            'swagger-js-codegen': {
+                queries: {
+                    options: {
+                        apis: [
+                            {
+                                swagger: 'tmp/swagger/APITest.json',
+                                moduleName: 'APITest', // This is the model and file name
+                                angularjs: true,
+                                className: 'APITest',
+                                fileName: 'APITest.js'
+                            }
+                        ],
+                        dest: 'tmp/angular'
+                    },
+                    dist: {}
+                }
+            },
 
             // Configuration to be run (and then tested).
             apidoc2swagger: {
-                testAPI : {
+                testAPI: {
                     options: {
-                        apiProject: 'test/api_project.json',
-                        apiData: 'test/api_data.json',
-                        swagger: 'tmp/'
+                        apiProject: 'tmp/apidoc/api_project.json',
+                        apiData: 'tmp/apidoc/api_data.json',
+                        swagger: 'tmp/swagger'
                     }
                 }
             },
             // Unit tests.
             nodeunit: {
                 tests: ['test/*_test.js']
+            },
+            jsdoc: {
+                dist: {
+                    src: ['tmp/angular/**/*.js', 'README.md'],
+                    options: {
+                        destination: 'tmp/jsdoc'
+                    }
+                }
+            },
+            bump: {
+                options: {
+                    files: ['package.json'],
+                    updateConfigs: [],
+                    commit: true,
+                    commitMessage: 'Release v%VERSION%',
+                    commitFiles: ['package.json'],
+                    createTag: true,
+                    tagName: 'v%VERSION%',
+                    tagMessage: 'Version %VERSION%',
+                    push: false,
+                    pushTo: 'upstream',
+                    gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+                    globalReplace: false
+                }
             }
         }
-    )
-    ;
+    );
 
 // Actually load this plugin's task(s).
     grunt.loadTasks('tasks');
@@ -53,13 +99,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
-
+    grunt.loadNpmTasks('grunt-swagger-js-codegen');
+    grunt.loadNpmTasks('grunt-apidoc');
+    grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('grunt-bump');
 // Whenever the "test" task is run, first clean the "tmp" dir, then run this
 // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'apidoc2swagger']);
 
 // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'test']);
-
+    grunt.registerTask('default', ['jshint', 'clean', 'apidoc', 'apidoc2swagger', 'swagger-js-codegen', 'jsdoc']);
 }
 ;

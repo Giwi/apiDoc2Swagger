@@ -5,9 +5,7 @@
  * Copyright (c) 2015 Xavier MARIN
  * Licensed under the MIT license.
  */
-
 'use strict';
-
 module.exports = function (grunt) {
 
     // Please see the Grunt documentation for more information regarding task
@@ -33,7 +31,6 @@ module.exports = function (grunt) {
                         };
                         for(var k in obj) {
                             grunt.log.warn(">>> " + key + "->" +k);
-
                             models[key].properties[k] = normalize(obj[k], k, models);
                         }
                     }
@@ -86,7 +83,8 @@ module.exports = function (grunt) {
                         basePath: options.basePath,
                         resourcePath: '/',
                         path: '/',
-                        models : {}
+                        models : {},
+                        produces: ["application/json"]
                 };
             }
                 var ope = {
@@ -100,7 +98,7 @@ module.exports = function (grunt) {
                 }
                 if (api.success) {
                     ope.type = api.success.fields['Success 200'].type;
-                    ope.item = {'$ref': api.success.fields['Success 200'].field}
+                    ope.item = {'$ref': api.success.fields['Success 200'].field};
                 }
                 if (api.parameter) {
                     api.parameter.fields.Parameter.forEach(function (param) {
@@ -165,15 +163,11 @@ module.exports = function (grunt) {
                     path: '/../' +key + '.json',
                     description: key
                 });
-                grunt.file.write(options.swagger + '/' + key + '.json', JSON.stringify(api, null, 2))
+                grunt.file.write(options.swagger + '/' + key + '.json', JSON.stringify(api, null, 2));
             });
 
             grunt.file.write(options.swagger + '/index.json', JSON.stringify(swaggerMain, null, 2));
-
-            //   grunt.log.writeln(JSON.stringify(swaggerMain, null, 4));
+            done();
         }
-
-
     });
-
 };
