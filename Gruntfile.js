@@ -40,7 +40,6 @@ module.exports = function (grunt) {
                             {
                                 swagger: 'tmp/swagger/APITest.json',
                                 moduleName: 'APITest', // This is the model and file name
-                                angularjs: true,
                                 className: 'APITest',
                                 fileName: 'APITest.js'
                             }
