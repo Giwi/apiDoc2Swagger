@@ -88,6 +88,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### 1.2.0
 Swagger 2.0 support
+
 ### 1.1.10
 Some bug fixes
 
